@@ -1,0 +1,16 @@
+
+
+table{
+    margin: 0 auto;
+    width: 63%;
+    border-collapse:collapse;
+}
+
+td{
+    text-align: center;
+    padding: 16px;
+
+}
+td,tr{
+	border:1px solid black;
+}
