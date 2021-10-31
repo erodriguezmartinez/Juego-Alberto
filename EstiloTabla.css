@@ -1,16 +1,24 @@
 
-
+header{
+    text-align:center;
+}
 table{
     margin: 0 auto;
     width: 63%;
     border-collapse:collapse;
+	
 }
-
 td{
     text-align: center;
     padding: 16px;
-
+	
 }
-td,tr{
+td,tr,th{
 	border:1px solid black;
+}
+tr:first-child th {
+    writing-mode: vertical-lr;
+}
+.vacio{
+	background-color:red;
 }
