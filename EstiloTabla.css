@@ -9,7 +9,6 @@ header{
 table{
   border: 2px solid black;
   margin: 0 auto;
-  width: 65%;
   border-collapse:collapse;
 }
 td{
@@ -17,7 +16,7 @@ td{
 }
 td,tr,th{
   white-space: nowrap;
-  padding: 10px;
+  padding: 0.4em 0.8em;
   border:2px solid black;
 }
 th{
@@ -35,4 +34,14 @@ input[type="text"]{
 }
 .vacio{
 	background-color: #FFDE01;
+}
+input[type="submit"]{
+	width:15% ;
+	height:15%;
+	font-size:x-large;
+	margin-top:2%;
+}
+#tabla{
+	margin: 0 auto;
+	text-align:center;
 }
