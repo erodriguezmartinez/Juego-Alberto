@@ -75,7 +75,8 @@ class Vista{
         }else{
           let marcador = document.createElement('input');
           marcador.setAttribute('type','text');
-          marcador.setAttribute('placeholder','0 - 0');
+          console.log(datos.resultados[i][j])
+          marcador.value = datos.resultados[i][j][0]+ " - "+datos.resultados[i][j][1];
           celdaMarcador.appendChild(marcador);
         }
         fila.appendChild(celdaMarcador);
