@@ -15,15 +15,20 @@ Año 2021
 class Administrar{
   constructor(){
     this.modelo = new Modelo(this)
-    this.vista = new Vista()
+    this.vista = new Vista(this)
     window.onload = this.iniciar.bind(this);
   }
   iniciar(){
     this.modelo.cargarDatos();
   }
-
+  cambiar(){
+    console.log('CAMBIARRRR');
+  }
 }
 class Vista{
+  constructor(controlador){
+    this.controlador = controlador
+  }
   crearTabla(datos){
     //Crear tabla
     let tabla = document.createElement('table');
@@ -62,7 +67,10 @@ class Vista{
         }else{
           let marcador = document.createElement('input');
           marcador.setAttribute('type','text');
-          console.log(datos.resultados[i][j])
+          marcador.setAttribute('data-fila','i')
+          marcador.setAttribute('data-col','j')
+          marcador.onchange=this.controlador.cambiar.bind(this.controlador)
+          //console.log(datos.resultados[i][j])
           marcador.value = datos.resultados[i][j][0]+ " - "+datos.resultados[i][j][1];
           celdaMarcador.appendChild(marcador);
         }
