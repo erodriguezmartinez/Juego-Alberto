@@ -43,17 +43,18 @@ class Vista{
       let columna = document.createElement('th');
       PrimeraFila.appendChild(columna);
       
-      /*if(datos.jugadores.isArray()){
-        for(let jugadorEquipo of datos.jugadores){
+      console.log(typeof datos.jugadores[0]);
+      if(typeof datos.jugadores[0]==='string'){
+        columna.appendChild(document.createTextNode(jugador));
+      }else{ 
+        for(let jugador of datos.jugadores[i]){
           columna.appendChild(document.createTextNode(jugador));
           columna.appendChild(document.createElement('br'));
         }
-      }else{
-        columna.appendChild(document.createTextNode(jugador));
-      } */
+      } 
       
-      columna.appendChild(document.createTextNode(jugador));
-      columna.appendChild(document.createElement('br'));
+      /*columna.appendChild(document.createTextNode(jugador));
+      columna.appendChild(document.createElement('br'));*/
       
       //Creamos tantas filas necesarias como jugadores tengamos
       let fila = document.createElement('tr');
@@ -84,6 +85,9 @@ class Vista{
       //Creamos las celdas de los puntos
       let celdaPuntos = document.createElement('th');
       fila.appendChild(celdaPuntos);
+
+      //FALTA INTRODUCIR LOS PUNTOS OBTENIDOS DE LA BBDD
+
       i++;
     }
   

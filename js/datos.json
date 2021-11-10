@@ -1,4 +1,14 @@
 {
-  "jugadores": ["Lola","Ana","Antonio","Alfonso","Juan","Marta","Andrea","Mateo","Carmen","Álvaro"]
+  "jugadores": [
+    ["Lola","Ana","Alfonso","Antonio"],
+    ["Juan","Marta","Alex","Mateo"],
+    ["Andrea","Carla","Sara","Alvaro"],
+    ["Lola","Ana","Alfonso","Antonio"],
+    ["Juan","Marta","Alex","Mateo"],
+    ["Andrea","Carla","Sara","Alvaro"],
+    ["Lola","Ana","Alfonso","Antonio"],
+    ["Juan","Marta","Alex","Mateo"],
+    ["Andrea","Carla","Sara","Alvaro"],
+    ["Lola","Ana","Alfonso","Antonio"]
+  ]
 }
-
