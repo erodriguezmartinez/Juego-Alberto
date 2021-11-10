@@ -14,14 +14,12 @@ Año 2021
 **/
 class Administrar{
   constructor(){
+    this.modelo = new Modelo(this)
     this.vista = new Vista()
     window.onload = this.iniciar.bind(this);
   }
   iniciar(){
-    //Cargar el fichero de datos
-    fetch("js/datos.json")
-      .then(response => response.json())
-      .then(datos => this.vista.crearTabla(datos));
+    this.modelo.cargarDatos();
   }
 
 }
@@ -36,36 +34,25 @@ class Vista{
     //Primera columna vacia
     let PrimeraColumna = document.createElement('th');
     PrimeraFila.appendChild(PrimeraColumna);
-    var i=0;
+    let i=0;
     for(let jugador of datos.jugadores){
      
       //Creamos tantas columnas necesarias de la primera fila
       let columna = document.createElement('th');
       PrimeraFila.appendChild(columna);
       
-      console.log(typeof datos.jugadores[0]);
-      if(typeof datos.jugadores[0]==='string'){
-        columna.appendChild(document.createTextNode(jugador));
-      }else{ 
-        for(let jugador of datos.jugadores[i]){
-          columna.appendChild(document.createTextNode(jugador));
-          columna.appendChild(document.createElement('br'));
-        }
-      } 
-      
-      /*columna.appendChild(document.createTextNode(jugador));
-      columna.appendChild(document.createElement('br'));*/
+      this.ponerNombres(datos.jugadores, jugador, columna, i);
+
       
       //Creamos tantas filas necesarias como jugadores tengamos
       let fila = document.createElement('tr');
       tabla.appendChild(fila);
       let columnaFilas = document.createElement('th');
       fila.appendChild(columnaFilas);
-      columnaFilas.appendChild(document.createTextNode(jugador));
-      columnaFilas.appendChild(document.createElement('br'));
+
+      this.ponerNombres(datos.jugadores, jugador, columnaFilas, i);
 
       //Creamos las celdas de los marcadores con sus respectivos marcadores
-      
       let j=0;
       for(let jugador of datos.jugadores){
         let celdaMarcador = document.createElement('td');
@@ -96,20 +83,35 @@ class Vista{
     PrimeraFila.appendChild(UltimaColumna);
     UltimaColumna.appendChild(document.createTextNode('Puntos'));
 
-    /*for(jugador of datos.jugadores){
-      let fila = document.createElement('tr');
-      tabla.appendChild(fila);
-      for(jugador of datos.jugadores){
-        let columna = document.createElement('td');
-        tabla.appendChild(fila);
-      }
-    }*/
   }
+
+  ponerNombres(datosJugadores, jugador, columna, i) {
+
+    //Comprobamos si json devuelve un string(tabla individual) o arrray (tabla grupal);
+    if(typeof datosJugadores[0]==='string'){
+      columna.appendChild(document.createTextNode(jugador));
+    }else{ 
+      for(let jugadorEquipo of datosJugadores[i]){
+        columna.appendChild(document.createTextNode(jugadorEquipo));
+        columna.appendChild(document.createElement('br'));
+      }
+    }
+  }
+
 }
 
 class Modelo{
+  constructor(controlador){
+    this.controlador = controlador;
+  }
   cargarDatos(){
-
+    //Cargar el fichero de datos
+    fetch("js/datos.json")
+    .then(response => response.json())
+    .then(datos => {
+      this.controlador.vista.crearTabla(datos)});
+    
   }
 }
+
 var app = new Administrar();
