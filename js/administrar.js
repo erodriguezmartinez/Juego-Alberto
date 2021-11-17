@@ -22,7 +22,7 @@ class Administrar{
   iniciar(){
     this.modelo.cargarDatos();
 
-    document.getElementById('guardar').onclick= this.modelo.guardarDatos;
+    document.getElementById('guardar').onclick= this.modelo.guardarDatos.bind(this.modelo);
   }
   cambiar(){
     console.log('CAMBIARRRR');
@@ -30,13 +30,13 @@ class Administrar{
 }
 class Vista{
   constructor(controlador){
-    this.controlador = controlador
+   this.controlador = controlador;
   }
 
   crearTabla(datos){
     //Crear tabla
     let tabla = document.createElement('table');
-    document.forms[0].insertBefore(tabla, document.getElementById("guardar"));
+    document.getElementById('tabla').insertBefore(tabla, document.getElementById("guardar"));
     //Primera fila encabezado
     let PrimeraFila = document.createElement('tr');
     tabla.appendChild(PrimeraFila);
@@ -71,8 +71,8 @@ class Vista{
         }else{
           let marcador = document.createElement('input');
           marcador.setAttribute('type','text');
-          marcador.setAttribute('data-fila','i')
-          marcador.setAttribute('data-col','j')
+          marcador.setAttribute('data-fila', i)
+          marcador.setAttribute('data-col', j)
           marcador.onblur=this.comprobar;
           marcador.onchange=this.controlador.cambiar.bind(this.controlador)
           //console.log(datos.resultados[i][j])
@@ -84,13 +84,27 @@ class Vista{
         j++;
       }
       //Creamos las celdas de los puntos
-      let celdaPuntos = document.createElement('th');
+      let  celdaPuntos= document.createElement('th');
       fila.appendChild(celdaPuntos);
-
+      let inputs = fila.querySelectorAll('input[type="text"]')
+      let puntos=0;
+      for (let input of inputs){
+        let valor=input.value.split(" - ")
+       if(parseInt(valor[0])>parseInt(valor[1])){
+          puntos+=3
+       }
+       if(parseInt(valor[0])==parseInt(valor[1])){
+        puntos+=1
+     }
+      }
+      celdaPuntos.appendChild(document.createTextNode(puntos));
       //FALTA INTRODUCIR LOS PUNTOS OBTENIDOS DE LA BBDD
+      puntos=0;
 
       i++;
     }
+  
+    
   
     //Última columna (puntos) 
     let UltimaColumna = document.createElement('th');
@@ -142,7 +156,7 @@ class Modelo{
   }
   guardarDatos(){
     let inputs = document.querySelectorAll('input[type="text"]')
-   
+    
     for (let input of inputs){
       let fila = input.getAttribute('data-fila')
       let col = input.getAttribute('data-col')
@@ -151,20 +165,23 @@ class Modelo{
 
       //split
       let valor=input.value.split(" - ")
-      console.log(valor);
-      debugger;
-      //el error esta antes del igual
-      this.datos[fila][col][0] = 2;
-      console.log(this.datos[fila][col][0]);
-      debugger;
-      this.datos[fila][col][1] = 1;
-      
+
+      if (this.datos.resultados[fila][col] != null){
+        this.datos.resultados[fila][col][0] = parseInt(valor[0])
+        this.datos.resultados[fila][col][1] = parseInt(valor[1])
+      }
+     
     }
-    //console.log(this.datos)
+    
+    console.log(JSON.stringify(this.datos))
+
+    
     //pasarlo a JSON
 
+ 
+ 
     //guardar en PHP
-   
+
   }
 }
 
