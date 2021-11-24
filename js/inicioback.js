@@ -41,7 +41,7 @@ class Vista{
         
         let td1 = document.createElement('td')
         let a1=document.createElement('a')
-        a1.href="tabla.html?idCompeticion="+""
+        a1.href="tabla.html?idCompeticion="+competicion[1]
         tr.appendChild(td1)
         td1.appendChild(a1)
         a1.appendChild(document.createTextNode(competicion[0]))
@@ -74,7 +74,8 @@ class Modelo{
   }
   cargarDatos(){
     //Cargar el fichero de datos
-    fetch("js/modelo/competiciones.json")
+    //fetch("js/modelo/competiciones.json")
+    fetch("php/listar.php")
     .then(response => response.json())
     .then(datos => {
       this.datos = datos;
