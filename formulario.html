@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Administración</title>
+	<link rel="stylesheet" type="text/css" href="formulario.css">
+  </head>
+  <body>
+    <h1>Administración de Ligas y Torneos</h1>
+	<form method="POST">
+		Nombre: <input type="text" name="Nombre" class="inputs" required><br>
+		Direccion: <input type="text" name="Direccion" class="inputs" required><br>
+		Jugadores:	<input type="text" name="Equipo" id="inputequipo">
+		<input type="button" id="botonmas" value="+" onclick="anadir()">
+    <div>
+  		<div id="equipomas"></div>
+    </div>
+
+		<input type="submit" name="Enviar" value="Enviar" id="botonEnviar">
+
+    <script src="js/formulario.js"></script>
+	</form>
+  </body>
+</html>
