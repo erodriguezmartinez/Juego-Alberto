@@ -1,17 +1,18 @@
 /**administrar.js
-Administración ligas y torneos.
-Autores:
-  Esperanza Rogríguez Martínez <erodriguezmartinez.guadalupe@alumnado.fundacionloyola.net>.
-  Juan Manuel Toscano Reyes <jtoscanoreyes.guadalupe@alumnado.fundacionloyola.net>.
-  Pablo Ceballos Benitez <pceballosbenitez.guadalupe@alumnado.fundacionloyola.net>.
-  Jose ALejandro Preciado <jpreciadosenero.guadalupe@alumnado.fundacionloyola.net>.
-@License GPL v3 o superior.
-Año 2021
+  Administración ligas y torneos.
+  Autores:
+    Esperanza Rogríguez Martínez <erodriguezmartinez.guadalupe@alumnado.fundacionloyola.net>.
+    Juan Manuel Toscano Reyes <jtoscanoreyes.guadalupe@alumnado.fundacionloyola.net>.
+    Pablo Ceballos Benitez <pceballosbenitez.guadalupe@alumnado.fundacionloyola.net>.
+    Jose ALejandro Preciado <jpreciadosenero.guadalupe@alumnado.fundacionloyola.net>.
+  @License GPL v3 o superior.
+  Año 2021
 **/
 'use strict'
 /**
   Clase Controlador Principal
 **/
+
 class Administrar{
   constructor(){
     this.modelo = new Modelo(this)
@@ -20,6 +21,8 @@ class Administrar{
   }
   iniciar(){
     this.modelo.cargarDatos();
+
+    document.getElementById('guardar').onclick= this.modelo.guardarDatos;
   }
   cambiar(){
     console.log('CAMBIARRRR');
@@ -29,6 +32,7 @@ class Vista{
   constructor(controlador){
     this.controlador = controlador
   }
+
   crearTabla(datos){
     //Crear tabla
     let tabla = document.createElement('table');
@@ -69,6 +73,7 @@ class Vista{
           marcador.setAttribute('type','text');
           marcador.setAttribute('data-fila','i')
           marcador.setAttribute('data-col','j')
+          marcador.onblur=this.comprobar;
           marcador.onchange=this.controlador.cambiar.bind(this.controlador)
           //console.log(datos.resultados[i][j])
           marcador.value = datos.resultados[i][j][0]+ " - "+datos.resultados[i][j][1];
@@ -107,19 +112,59 @@ class Vista{
     }
   }
 
+  comprobar(){
+    console.log("Comprobar...");
+    /*
+    let exp1= new RegExp(/^(\d{1,3}\.){3}\d{1,3}$/);
+    //if(!document.getElementById('iTP').ariaValueMax.match(exp1)){
+    if(!exp1.test(document.getElementById('iTP').value)){
+        console.log('IP erronea');
+        */
+  }
+
+  
 }
+
 
 class Modelo{
   constructor(controlador){
     this.controlador = controlador;
+    this.datos = null;
   }
   cargarDatos(){
     //Cargar el fichero de datos
-    fetch("js/datos.json")
+    fetch("js/modelo/datos.json")
     .then(response => response.json())
     .then(datos => {
+      this.datos = datos;
       this.controlador.vista.crearTabla(datos)});
     
+  }
+  guardarDatos(){
+    let inputs = document.querySelectorAll('input[type="text"]')
+   
+    for (let input of inputs){
+      let fila = input.getAttribute('data-fila')
+      let col = input.getAttribute('data-col')
+      
+      //parsear
+
+      //split
+      let valor=input.value.split(" - ")
+      console.log(valor);
+      debugger;
+      //el error esta antes del igual
+      this.datos[fila][col][0] = 2;
+      console.log(this.datos[fila][col][0]);
+      debugger;
+      this.datos[fila][col][1] = 1;
+      
+    }
+    //console.log(this.datos)
+    //pasarlo a JSON
+
+    //guardar en PHP
+   
   }
 }
 
