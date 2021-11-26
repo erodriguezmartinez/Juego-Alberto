@@ -1,3 +1,4 @@
+
 /**administrar.js
   Administración ligas y torneos.
   Autores:
