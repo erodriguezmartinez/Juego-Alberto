@@ -1,3 +1,4 @@
+
 /**administrar.js
   Administración ligas y torneos.
   Autores:
@@ -13,6 +14,13 @@
   Clase Controlador Principal
 **/
 
+/*
+  Pasar clave junto a JSON por el boton "Guardar", PHP comprobara la clave para grabar.
+
+*/
+
+
+
 class Administrar{
   constructor(){
     this.modelo = new Modelo(this)
@@ -22,7 +30,8 @@ class Administrar{
   iniciar(){
     this.modelo.cargarDatos();
 
-    document.getElementById('guardar').onclick= this.modelo.guardarDatos.bind(this.modelo);
+    if(document.getElementById('guardar') != null)
+      document.getElementById('guardar').onclick= this.modelo.guardarDatos.bind(this.modelo);
   }
   cambiar(){
     console.log('CAMBIARRRR');
@@ -45,14 +54,14 @@ class Vista{
     PrimeraFila.appendChild(PrimeraColumna);
     let i=0;
     for(let jugador of datos.jugadores){
-     
+
       //Creamos tantas columnas necesarias de la primera fila
       let columna = document.createElement('th');
       PrimeraFila.appendChild(columna);
-      
+
       this.ponerNombres(datos.jugadores, jugador, columna, i);
 
-      
+
       //Creamos tantas filas necesarias como jugadores tengamos
       let fila = document.createElement('tr');
       tabla.appendChild(fila);
@@ -65,19 +74,25 @@ class Vista{
       let j=0;
       for(let jugador of datos.jugadores){
         let celdaMarcador = document.createElement('td');
-        
+
         if(i==j){
           celdaMarcador.classList.add('vacio');
         }else{
+          let clave = undefined;
           let marcador = document.createElement('input');
+          marcador.setAttribute('class', 'marcadores');
           marcador.setAttribute('type','text');
           marcador.setAttribute('data-fila', i)
           marcador.setAttribute('data-col', j)
+          if(clave == undefined){
+            marcador.setAttribute('readonly','readonly');
+          }
           marcador.onblur=this.comprobar;
           marcador.onchange=this.controlador.cambiar.bind(this.controlador)
           //console.log(datos.resultados[i][j])
           marcador.value = datos.resultados[i][j][0]+ " - "+datos.resultados[i][j][1];
           celdaMarcador.appendChild(marcador);
+
         }
         fila.appendChild(celdaMarcador);
 
@@ -103,13 +118,20 @@ class Vista{
 
       i++;
     }
-  
-    
-  
-    //Última columna (puntos) 
+
+
+
+    //Última columna (puntos)
     let UltimaColumna = document.createElement('th');
     PrimeraFila.appendChild(UltimaColumna);
     UltimaColumna.appendChild(document.createTextNode('Puntos'));
+
+
+
+
+
+
+
 
   }
 
@@ -118,7 +140,7 @@ class Vista{
     //Comprobamos si json devuelve un string(tabla individual) o arrray (tabla grupal);
     if(typeof datosJugadores[0]==='string'){
       columna.appendChild(document.createTextNode(jugador));
-    }else{ 
+    }else{
       for(let jugadorEquipo of datosJugadores[i]){
         columna.appendChild(document.createTextNode(jugadorEquipo));
         columna.appendChild(document.createElement('br'));
@@ -136,7 +158,7 @@ class Vista{
         */
   }
 
-  
+
 }
 
 
@@ -152,15 +174,15 @@ class Modelo{
     .then(datos => {
       this.datos = datos;
       this.controlador.vista.crearTabla(datos)});
-    
+
   }
   guardarDatos(){
     let inputs = document.querySelectorAll('input[type="text"]')
-    
+
     for (let input of inputs){
       let fila = input.getAttribute('data-fila')
       let col = input.getAttribute('data-col')
-      
+
       //parsear
 
       //split
@@ -170,16 +192,16 @@ class Modelo{
         this.datos.resultados[fila][col][0] = parseInt(valor[0])
         this.datos.resultados[fila][col][1] = parseInt(valor[1])
       }
-     
+
     }
-    
+
     console.log(JSON.stringify(this.datos))
 
-    
+
     //pasarlo a JSON
 
- 
- 
+
+
     //guardar en PHP
 
   }
