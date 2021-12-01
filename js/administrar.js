@@ -78,7 +78,7 @@ class Vista{
         if(i==j){
           celdaMarcador.classList.add('vacio');
         }else{
-          let clave = undefined;
+          
           let marcador = document.createElement('input');
           marcador.setAttribute('class', 'marcadores');
           marcador.setAttribute('type','text');
@@ -89,8 +89,13 @@ class Vista{
           }
           marcador.onblur=this.comprobar;
           marcador.onchange=this.controlador.cambiar.bind(this.controlador)
-          //console.log(datos.resultados[i][j])
-          marcador.value = datos.resultados[i][j][0]+ " - "+datos.resultados[i][j][1];
+          if(datos.resultados){
+            //console.log(datos.resultados[i][j])
+            marcador.value = datos.resultados[i][j][0]+ " - "+datos.resultados[i][j][1];
+            
+          }else{
+            marcador.value="0 - 0";
+          }
           celdaMarcador.appendChild(marcador);
 
         }
@@ -169,7 +174,11 @@ class Modelo{
   }
   cargarDatos(){
     //Cargar el fichero de datos
-    fetch("js/modelo/datos.json")
+    var url = window.location.search;
+    var parametro = new URLSearchParams(url);
+    var jsonCompeticion = parametro.get('idCompeticion');
+    console.log(jsonCompeticion)
+    fetch("competiciones/"+jsonCompeticion)
     .then(response => response.json())
     .then(datos => {
       this.datos = datos;

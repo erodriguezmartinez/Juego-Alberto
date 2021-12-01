@@ -26,18 +26,18 @@
     <main>
         <section>
           <h1>Administración de Ligas y Torneos</h1>
-          <form method="POST">
-            Nombre: <input type="text" name="Nombre" id="nombre" required><br>
-            Descripción: <input type="text" name="Descripción"  id="descripcion"required><br>
-            Jugadores:	<input type="text" name="Equipo" id="jugadores">
-            <button onclick="anadir()"><img class="addImg" src="img/add.png"></button>
-            <!--<input type="button" id="botonmas" value="+" >-->
-            <div>
-              <div id="equipomas"></div>
-            </div>
+          
+          Nombre: <input type="text" name="Nombre" id="nombre" required><br>
+          Descripción: <input type="text" name="Descripción"  id="descripcion"required><br>
+          Jugadores:	<input type="text" name="Equipo" id="jugadores" data-jugador=1 >
+          <button type="button" onclick="anadir()"><img class="addImg" src="img/add.png"></button>
+          <!--<input type="button" id="botonmas" value="+" >-->
+          <div>
+            <div id="equipomas"></div>
+          </div>
 
-            <input type="button" name="Enviar" value="Enviar" id="botonEnviar" onclick="enviar()">
-          </form>
+          <input type="button" name="Enviar" value="Enviar" id="botonEnviar" onclick="enviar()">
+          
         </section>
       </main>
       <footer>
