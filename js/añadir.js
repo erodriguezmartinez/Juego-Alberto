@@ -31,3 +31,15 @@ function destruir(evento){
   evento.target.remove()
 
 }
+
+
+
+function enviar(){
+  console.log('asdsad');
+  new Competicion()
+}
+class Competicion{
+  constructor(){
+    
+  }
+}
