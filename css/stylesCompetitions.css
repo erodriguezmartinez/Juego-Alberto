@@ -53,6 +53,7 @@ main{
 section{
   width: 100%;
   padding: 2%;
+  box-sizing: border-box;
 }
 h1{
 	margin-bottom: 0.65em;
@@ -128,7 +129,7 @@ td,tr,th{
 th{
 	text-align: left;
 	color: white;
-background-color: #074FF0;
+	background-color: #074FF0;
 }
 tr:first-child th {
 	vertical-align: top;
@@ -141,9 +142,30 @@ input[type="text"]{
 .vacio{
 	background-color: #FFDE01;
 }
+/*
 button{
 	width:15% ;
 	height:15%;
 	font-size:x-large;
 	margin-top:2%;
 }
+#botonmas{
+	width: 30px;
+	height: 30px;
+	font-weight: bold;
+	font-size: 20px;
+	font-family: Arial;
+	border-radius: 15px;
+	background-color: yellow;
+	margin-left: 2px;
+}
+.botonmenos{
+	width: 30px;
+	height: 30px;
+	font-weight: bold;
+	font-size: 20px;
+	font-family: Arial;
+	border-radius: 15px;
+	background-color: red;
+	margin-left: 6px;
+}*/
