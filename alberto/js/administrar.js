@@ -23,18 +23,19 @@
 
 class Administrar{
   constructor(){
-    this.modelo = new Modelo(this)
-    this.vista = new Vista(this)
+    this.modelo = new Modelo(this);
+    this.vista = new Vista(this);
     window.onload = this.iniciar.bind(this);
   }
   iniciar(){
     this.modelo.cargarDatos();
 
-    if(document.getElementById('guardar') != null)
+    if(document.getElementById('guardar') != null);
       document.getElementById('guardar').onclick= this.modelo.guardarDatos.bind(this.modelo);
   }
   cambiar(){
     console.log('CAMBIARRRR');
+
   }
 }
 class Vista{
@@ -84,10 +85,8 @@ class Vista{
           marcador.setAttribute('type','text');
           marcador.setAttribute('data-fila', i)
           marcador.setAttribute('data-col', j)
-          if(clave == undefined){
-            marcador.setAttribute('readonly','readonly');
-          }
-          marcador.onblur=this.comprobar;
+
+         
           marcador.onchange=this.controlador.cambiar.bind(this.controlador)
           if(datos.resultados){
             //console.log(datos.resultados[i][j])
@@ -96,6 +95,7 @@ class Vista{
           }else{
             marcador.value="0 - 0";
           }
+          marcador.addEventListener("onblur", this.comprobar(marcador), false);
           celdaMarcador.appendChild(marcador);
 
         }
@@ -132,12 +132,6 @@ class Vista{
     UltimaColumna.appendChild(document.createTextNode('Puntos'));
 
 
-
-
-
-
-
-
   }
 
   ponerNombres(datosJugadores, jugador, columna, i) {
@@ -153,19 +147,13 @@ class Vista{
     }
   }
 
-  comprobar(){
-    console.log("Comprobar...");
-    /*
-    let exp1= new RegExp(/^(\d{1,3}\.){3}\d{1,3}$/);
-    //if(!document.getElementById('iTP').ariaValueMax.match(exp1)){
-    if(!exp1.test(document.getElementById('iTP').value)){
-        console.log('IP erronea');
-        */
+  comprobar(marcador){
+    let exp= new RegExp(/^[0-9]{1,2}\s[-]\s[0-9]{1,2}$/);
+    if(!exp.test(marcador.value)){
+      console.log('Marcador erroneo'); 
+    }
   }
-
-
 }
-
 
 class Modelo{
   constructor(controlador){
